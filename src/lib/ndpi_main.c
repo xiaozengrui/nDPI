@@ -2481,6 +2481,12 @@ static void ndpi_init_protocol_defaults(struct ndpi_detection_module_struct *ndp
                           ndpi_build_default_ports(ports_a, 0, 0, 0, 0, 0) /* TCP */,
                           ndpi_build_default_ports(ports_b, 0, 0, 0, 0, 0) /* UDP */);
 
+  ndpi_set_proto_defaults(ndpi_str, 1 /* cleartext */, 0 /* nw proto */, NDPI_PROTOCOL_ACCEPTABLE, NDPI_PROTOCOL_XML_RPC,
+                          "XML-RPC", NDPI_PROTOCOL_CATEGORY_RPC,
+                          ndpi_build_default_ports(ports_a, 0, 0, 0, 0, 0) /* TCP */,
+                          ndpi_build_default_ports(ports_b, 0, 0, 0, 0, 0) /* UDP */);
+
+
 #ifdef CUSTOM_NDPI_PROTOCOLS
 #include "../../../nDPI-custom/custom_ndpi_main.c"
 #endif
@@ -6389,6 +6395,10 @@ static int ndpi_callback_init(struct ndpi_detection_module_struct *ndpi_str) {
 
   /* GearUP Booster */
   init_gearup_booster_dissector(ndpi_str, &a);
+
+  /* XML-RPC */
+  init_xml_rpc_dissector(ndpi_str, &a);
+
 
 #ifdef CUSTOM_NDPI_PROTOCOLS
 #include "../../../nDPI-custom/custom_ndpi_main_init.c"
